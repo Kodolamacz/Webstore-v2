@@ -57,25 +57,25 @@ public class PersistanceConfig {
 
         return em;
     }
-    @Bean
-    public LocalSessionFactoryBean sessionFactory(){
-        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(new String[]{"com.webstore.domain"});
-        sessionFactory.setHibernateProperties(getHibernateProperties());
+//    @Bean
+//    public LocalSessionFactoryBean sessionFactory(){
+//        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+//        sessionFactory.setDataSource(dataSource());
+//        sessionFactory.setPackagesToScan(new String[]{"com.webstore.domain"});
+//        sessionFactory.setHibernateProperties(getHibernateProperties());
+//
+//        return sessionFactory;
+//    }
 
-        return sessionFactory;
-    }
-
-    @Bean
-    @Autowired
-    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory){
-
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory);
-        return transactionManager;
-
-    }
+//    @Bean
+//    @Autowired
+//    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory){
+//
+//        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+//        transactionManager.setSessionFactory(sessionFactory);
+//        return transactionManager;
+//
+//    }
 
     @Bean
     @Autowired
