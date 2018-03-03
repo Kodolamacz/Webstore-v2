@@ -14,7 +14,7 @@ public class Product {
     private Long id;
     private double price;
     private int unitsInStock;
-    private int getUnitsInOrder;
+    private int unitsInOrder;
     private String name;
     private String category;
     private String description;
@@ -25,11 +25,11 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, double price, int unitsInStock, int getUnitsInOrder, String name, String category, String description, String manufacturer, String condition, Set<CartItem> cartItem) {
+    public Product(Long id, double price, int unitsInStock, int unitsInOrder, String name, String category, String description, String manufacturer, String condition, Set<CartItem> cartItem) {
         this.id = id;
         this.price = price;
         this.unitsInStock = unitsInStock;
-        this.getUnitsInOrder = getUnitsInOrder;
+        this.unitsInOrder = unitsInOrder;
         this.name = name;
         this.category = category;
         this.description = description;
@@ -68,12 +68,12 @@ public class Product {
     }
 
     @Column(name = "units_in_order")
-    public int getGetUnitsInOrder() {
-        return getUnitsInOrder;
+    public int getUnitsInOrder() {
+        return unitsInOrder;
     }
 
-    public void setGetUnitsInOrder(int getUnitsInOrder) {
-        this.getUnitsInOrder = getUnitsInOrder;
+    public void setUnitsInOrder(int unitsInOrder) {
+        this.unitsInOrder = unitsInOrder;
     }
 
     @Column(name = "name",nullable = false)

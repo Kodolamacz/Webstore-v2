@@ -1,6 +1,5 @@
 package com.webstore.config;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,8 +9,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -30,7 +27,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @ComponentScan(basePackages = "com.webstore")
 @PropertySource("classpath:config.properties")
-@EnableJpaRepositories(basePackages = "com.webstore.domain.dao")
+@EnableJpaRepositories(basePackages = "com.webstore.dao.dao")
 public class PersistanceConfig {
 
     @Autowired
@@ -68,16 +65,16 @@ public class PersistanceConfig {
 //
 //        return sessionFactory;
 //    }
-
-    @Bean
-    @Autowired
-    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory){
-
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory);
-        return transactionManager;
-
-    }
+//
+//    @Bean
+//    @Autowired
+//    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory){
+//
+//        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+//        transactionManager.setSessionFactory(sessionFactory);
+//        return transactionManager;
+//
+//    }
 
     @Bean
     @Autowired
