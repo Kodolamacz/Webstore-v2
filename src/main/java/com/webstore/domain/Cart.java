@@ -1,6 +1,7 @@
 package com.webstore.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -14,7 +15,7 @@ public class Cart {
 
     private Long id;
     private double totalOrderValue;
-    private Set<CartItem> items;
+    private Set<CartItem> items = new HashSet<>();
     private User user;
 
     public Cart( double totalOrderValue, Set<CartItem> items, User user) {

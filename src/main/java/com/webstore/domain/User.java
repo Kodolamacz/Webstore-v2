@@ -1,6 +1,7 @@
 package com.webstore.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,9 +18,9 @@ public class User {
     private String firstName;
     private String lastName;
     private Address address;
-    private Set<Role> role;
+    private Set<Role> role = new HashSet<>();
     private boolean isActive;
-    private Set<Cart> userCarts;
+    private Set<Cart> userCarts = new HashSet<>();
 
     public User() {
     }

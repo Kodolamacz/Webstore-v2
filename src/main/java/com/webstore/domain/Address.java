@@ -97,7 +97,7 @@ public class Address {
         this.zipCode = zipCode;
     }
 
-    @Column(name = "user_id")
+    //@Column(name = "user_id")
     @OneToOne(mappedBy = "address")
     public User getUser() {
         return user;

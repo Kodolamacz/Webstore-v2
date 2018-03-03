@@ -1,6 +1,7 @@
 package com.webstore.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -19,7 +20,7 @@ public class Product {
     private String description;
     private String manufacturer;
     private String condition;
-    private Set<CartItem> cartItem;
+    private Set<CartItem> cartItem = new HashSet<>();
 
     public Product() {
     }
