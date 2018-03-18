@@ -1,6 +1,10 @@
 package com.webstore.domain;
 
+import com.webstore.validators.IEmailValidator;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,14 +13,35 @@ import java.util.Set;
  * Created by Blazej on 05.02.2018.
  */
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 public class User {
 
     private long id;
+
+//    @NotNull
+ //   @NotEmpty
     private String login;
+
+//    @NotNull
+//    @NotEmpty
     private String password;
+
+    //private String matchingPassword;
+
+//    @NotNull
+//    @NotEmpty
     private String firstName;
+
+
+//    @NotNull
+//    @NotEmpty
     private String lastName;
+
+//    @IEmailValidator
+//    @NotNull
+//    @NotEmpty
+    private String email;
+
     private Address address;
     private Set<Role> role = new HashSet<>();
     private boolean isActive;
@@ -25,7 +50,8 @@ public class User {
     public User() {
     }
 
-    public User(String login, String password, String firstName, String lastName, Address address, Set<Role> role, boolean isActive, Set<Cart> userCarts) {
+    public User(String login, String password, String firstName, String lastName, Address address, Set<Role> role,
+                boolean isActive, Set<Cart> userCarts, String email) {
 
         this.login = login;
         this.password = password;
@@ -35,6 +61,7 @@ public class User {
         this.role = role;
         this.isActive = isActive;
         this.userCarts = userCarts;
+        this.email = email;
     }
 
     @Id
@@ -107,7 +134,7 @@ public class User {
         this.role = role;
     }
 
-    @Column(name = "isActive",nullable = false)
+    @Column(name = "is_active",nullable = false)
     public boolean isActive() {
         return isActive;
     }
@@ -124,4 +151,22 @@ public class User {
     public void setUserCarts(Set<Cart> userCarts) {
         this.userCarts = userCarts;
     }
+
+    @Column(name = "email")
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+//    @Transient
+//    public String getMatchingPassword() {
+//        return matchingPassword;
+//    }
+//
+//    public void setMatchingPassword(String matchingPassword) {
+//        this.matchingPassword = matchingPassword;
+//    }
 }

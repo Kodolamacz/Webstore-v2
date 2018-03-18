@@ -27,7 +27,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @ComponentScan(basePackages = "com.webstore")
 @PropertySource("classpath:config.properties")
-@EnableJpaRepositories(basePackages = "com.webstore.dao.dao")
+@EnableJpaRepositories(basePackages = "com.webstore.dao")
 public class PersistanceConfig {
 
     @Autowired
@@ -76,9 +76,9 @@ public class PersistanceConfig {
 //
 //    }
 
-    @Bean
+    @Bean(name = "transactionManager")
     @Autowired
-    public PlatformTransactionManager entityManager(EntityManagerFactory emf){
+    public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
         jpaTransactionManager.setEntityManagerFactory(emf);
         return jpaTransactionManager;

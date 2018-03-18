@@ -24,6 +24,11 @@ public class Role {
         this.users = users;
     }
 
+    public Role(String name) {
+        this.name = name;
+     //   this.users = users;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "role_id",unique = true,nullable = false)
