@@ -1,20 +1,16 @@
 package com.webstore.config;
 
-import com.webstore.dao.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.core.env.Environment;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-
-import javax.sql.DataSource;
 
 /**
  * Created by Blazej on 24.01.2018.
@@ -22,7 +18,8 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.webstore")
-@PropertySource("classpath:config.properties")
+@PropertySource({"classpath:config.properties", "classpath:ValidationMessages.properties"})
+
 public class ApplicationConfig implements WebMvcConfigurer{
 
 
@@ -55,11 +52,25 @@ public class ApplicationConfig implements WebMvcConfigurer{
         configurer.enable();
     }
 
-//    @Override
-//    public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/login").setViewName("customLogin");
-//        registry.addViewController("/welcome").setViewName("welcome");
-//        registry.addViewController("/403").setViewName("403");
-//    }
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/login").setViewName("customLogin");
+        //registry.addViewController("/userPage").setViewName("userPage");
+        //registry.addViewController("/welcome").setViewName("welcome");
+        registry.addViewController("/403").setViewName("403");
+    }
 
+    @Bean
+    public MessageSource messageSource(){
+        ResourceBundleMessageSource rbms = new ResourceBundleMessageSource();
+        rbms.setBasename("ValidationMessages");
+       rbms.setDefaultEncoding("UTF-8");
+        return rbms;
+    }
+//    @Bean
+//    public LocalValidatorFactoryBean validatorFactoryBean(){
+//        LocalValidatorFactoryBean validatorFactoryBean = new LocalValidatorFactoryBean();
+//        validatorFactoryBean.setValidationMessageSource(messageSource());
+//        return validatorFactoryBean;
+//    }
 }

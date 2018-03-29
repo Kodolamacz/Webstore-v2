@@ -1,45 +1,44 @@
 package com.webstore.domain;
 
-import com.webstore.validators.IEmailValidator;
+
+import com.webstore.validators.interfaces.IEmailValidator;
+import com.webstore.validators.interfaces.MatchingPassword;
+import com.webstore.validators.interfaces.UserExists;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+
 
 /**
  * Created by Blazej on 05.02.2018.
  */
 @Entity
 @Table(name = "users")
+@UserExists
+@MatchingPassword
 public class User {
 
     private long id;
 
-//    @NotNull
- //   @NotEmpty
+    @NotEmpty(message = "{notnull.field}")
     private String login;
 
-//    @NotNull
-//    @NotEmpty
+    @NotEmpty(message = "{notnull.field}")
     private String password;
 
-    //private String matchingPassword;
+    @NotEmpty(message = "{notnull.field}")
+    private String matchingPassword;
 
-//    @NotNull
-//    @NotEmpty
+    @NotEmpty(message = "{notnull.field}")
     private String firstName;
 
-
-//    @NotNull
-//    @NotEmpty
+    @NotEmpty(message = "{notnull.field}")
     private String lastName;
 
-//    @IEmailValidator
-//    @NotNull
-//    @NotEmpty
+    @IEmailValidator
+    @NotEmpty(message = "{notnull.field}")
     private String email;
 
     private Address address;
@@ -159,6 +158,15 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Transient
+    public String getMatchingPassword() {
+        return matchingPassword;
+    }
+
+    public void setMatchingPassword(String matchingPassword) {
+        this.matchingPassword = matchingPassword;
     }
 
 //    @Transient

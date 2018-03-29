@@ -23,6 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 
+
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -41,23 +42,41 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         return daoAuthenticationProvider;
 
     }
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider());
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+       auth.authenticationProvider(authenticationProvider());
+        //auth.inMemoryAuthentication().withUser("admin").password("test").roles("ADMIN");
     }
 
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-        http.authorizeRequests().antMatchers("/registration").permitAll().anyRequest().authenticated()
+
+        http.authorizeRequests().antMatchers("/registration","/welcome").permitAll().anyRequest().authenticated()
                 .and()
         .authorizeRequests().anyRequest().hasAnyRole("ADMIN", "USER")
 
                 .and()
                 .authorizeRequests().antMatchers("/login").permitAll()
                 .and()
-                .formLogin().loginPage("/login").loginProcessingUrl("/login").successForwardUrl("/welcome").permitAll()
+                .formLogin().loginPage("/login").loginProcessingUrl("/loginAction").successForwardUrl("/userPage")
+                .failureUrl("/login?error=true")
+                .permitAll()
                 .and()
-                .csrf().disable();
+                .exceptionHandling().accessDeniedPage("/403").and()
+                .csrf();
+
+//        http //auto-config="true"
+//                .authorizeRequests()
+//                .anyRequest().authenticated()
+//                .and()
+//                .formLogin()
+//                .and()
+//                .httpBasic();
     }
+
+//    @Override
+//    public void configure(WebSecurity webSecurity){
+//    webSecurity.debug(true);
+//    }
 }

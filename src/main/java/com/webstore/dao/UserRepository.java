@@ -2,7 +2,7 @@ package com.webstore.dao;
 
 import com.webstore.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,6 +22,9 @@ public interface UserRepository extends JpaRepository<User,Long> {
    void deleteByLogin(String login);
   // List<User> findByIsActiveTrue();
    List<User> findByRole_Name(String roleName);
+
+   @Query(value="select login from User u",nativeQuery = true)
+   List<String> findLogins();
 
 
 }

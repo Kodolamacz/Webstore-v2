@@ -8,9 +8,9 @@
     <title>Login Page</title>
 </head>
 <body>
-<form action="${contextPath}/login" method="post">
+<form action="${contextPath}/loginAction" method="post">
     <div>
-        <input type="text" name="login"
+        <input type="text" name="username"
                placeholder="Login" />
     </div>
     <div>

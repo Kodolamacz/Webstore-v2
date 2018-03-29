@@ -1,7 +1,6 @@
 package com.webstore.dao;
 
 import com.webstore.domain.Role;
-import com.webstore.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
